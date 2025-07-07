@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ravindra Chabhadia - Software Engineer specializing in AI, Cloud Computing, and Distributed Systems. MS in Information Systems from Northeastern University.">
+    <meta name="keywords" content="Ravindra Chabhadia, Software Engineer, AI, Cloud Computing, AWS, Python, Java, Northeastern University">
+    <meta name="author" content="Ravindra Chabhadia">
+    <title>Ravindra Chabhadia - Software Engineer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --text-primary: #0a0a0a;
+            --text-secondary: #606060;
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
+            --card-bg: rgba(0, 0, 0, 0.05);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="light"] nav {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--accent), var(--accent-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            transform: rotate(180deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 2rem;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--text-primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease-in-out infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            aspect-ratio: 1;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+        }
+
+        .about-image::before {
+            content: '📸';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            opacity: 0.3;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent), var(--accent-hover));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .project-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-links a:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Experience and Education Cards Animation */
+        .experience-card, .education-card {
+            transition: all 0.3s ease;
+        }
+
+        .experience-card:hover, .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block !important;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-primary);
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid var(--border-color);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-container {
+                justify-content: space-between;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-image {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 200px;
+                text-align: center;
+            }
+
+            .contact-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        .project-card .skill-tag {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .project-card .skill-tag:hover {
+            border-color: var(--accent);
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">RC</div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" style="display: none; background: none; border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.5rem; border-radius: 0.5rem; cursor: pointer; font-size: 1.2rem; transition: all 0.3s ease;">☰</button>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>Ravindra Chabhadia</h1>
+            <p>Software Engineer | AI & Cloud Specialist | MS Information Systems @ Northeastern</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                <a href="resume.pdf" class="btn btn-secondary" download>📄 Download Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-image"></div>
+            <div class="about-text">
+                <p>🔭 I'm a Software Engineer with a Master's in Information Systems from Northeastern University, passionate about building scalable solutions at the intersection of AI, Cloud Computing, and Distributed Systems.</p>
+                <p>🛠️ With experience at companies like Amherst Intelligent Security and GoldField, I've architected cloud-native applications, optimized distributed systems, and implemented AI-driven solutions that deliver real business value. Currently focused on developing intelligent tools and full-stack systems that solve complex problems.</p>
+                <div class="skills">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">ReactJS</span>
+                    <span class="skill-tag">Next.js</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Spring Boot</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Azure</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Kubernetes</span>
+                    <span class="skill-tag">Terraform</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">MySQL</span>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://github.com/ravindrachabhadia?tab=repositories" class="btn btn-primary">View All Projects on GitHub →</a>
+        </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="experience" class="fade-in">
+        <h2 class="section-title">Work Experience</h2>
+        <div class="experience-timeline" style="max-width: 900px; margin: 0 auto;">
+            <div class="experience-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem; position: relative;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Software Engineer</h3>
+                <p style="color: var(--accent); font-size: 1.1rem; margin-bottom: 0.5rem;">Amherst Intelligent Security, Boston, MA</p>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Jan 2024 - May 2024</p>
+                <ul style="color: var(--text-secondary); list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 0.5rem;">• Redesigned scalable video monitoring service on AWS, reducing latency by 30% with AWS Lambda and Kinesis</li>
+                    <li style="margin-bottom: 0.5rem;">• Optimized distributed systems for high traffic with load balancing, auto-scaling, and caching</li>
+                    <li>• Automated infrastructure provisioning using Terraform for consistent deployments</li>
+                </ul>
+            </div>
+            <div class="experience-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Software Developer</h3>
+                <p style="color: var(--accent); font-size: 1.1rem; margin-bottom: 0.5rem;">GoldField, Mumbai, India</p>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Dec 2020 - May 2022</p>
+                <ul style="color: var(--text-secondary); list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 0.5rem;">• Designed responsive web applications using React.js and Java Spring MVC architecture</li>
+                    <li style="margin-bottom: 0.5rem;">• Improved API response times by 30% through MySQL optimization and indexing</li>
+                    <li style="margin-bottom: 0.5rem;">• Orchestrated RESTful API documentation with Swagger for seamless cross-team integration</li>
+                    <li>• Enhanced software reliability detecting 25% more bugs pre-release using Jest and Enzyme</li>
+                </ul>
+            </div>
+            <div class="experience-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Software Developer</h3>
+                <p style="color: var(--accent); font-size: 1.1rem; margin-bottom: 0.5rem;">Skyllect, Mumbai, India</p>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">May 2020 - Aug 2020</p>
+                <ul style="color: var(--text-secondary); list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 0.5rem;">• Engineered streamlined onboarding interface achieving 60% efficiency improvement</li>
+                    <li style="margin-bottom: 0.5rem;">• Architected components using Spring Boot, Spring Cloud, Node.js, and AWS Lambda</li>
+                    <li>• Boosted project efficiency by 30% with scalable microservices using OOP principles</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="fade-in">
+        <h2 class="section-title">Education</h2>
+        <div class="education-content" style="max-width: 800px; margin: 0 auto;">
+            <div class="education-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Master of Science in Information Systems</h3>
+                <p style="color: var(--accent); font-size: 1.1rem; margin-bottom: 0.5rem;">Northeastern University</p>
+                <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">Boston, MA | Sep 2022 - Dec 2024</p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Relevant Courses: Program Structures, Cloud Computing, Object-Oriented Design, Web Development Tools</p>
+            </div>
+            <div class="education-card" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1rem; padding: 2rem;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Bachelor of Engineering in Information Technology</h3>
+                <p style="color: var(--accent); font-size: 1.1rem; margin-bottom: 0.5rem;">Mumbai University</p>
+                <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">Mumbai, India | Aug 2018 - May 2022</p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Relevant Courses: Data Structures and Algorithms, Software Engineering, Operating Systems, Computer Networking</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="fade-in">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3 class="project-title">Assignment Management System</h3>
+                <p class="project-description">Cloud-native application with Node.js and PostgreSQL featuring REST APIs, CI/CD with GitHub Actions, and AWS infrastructure (EC2, Lambda, SNS) that doubled user load capacity.</p>
+                <div class="skills" style="margin: 1rem 0;">
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Node.js</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">PostgreSQL</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">AWS</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Terraform</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/ravindrachabhadia">GitHub →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <h3 class="project-title">InventoryHub</h3>
+                <p class="project-description">Django REST API for inventory management with PostgreSQL, Token Authentication, and Swagger documentation. Deployed on Heroku with 20% faster deployment times.</p>
+                <div class="skills" style="margin: 1rem 0;">
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Django</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">PostgreSQL</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">REST API</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Heroku</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/ravindrachabhadia">GitHub →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <h3 class="project-title">FlexiSearch</h3>
+                <p class="project-description">Spring Boot microservice integrated with Kafka and Elasticsearch, reducing message processing time by 40% and increasing query speed by 50%.</p>
+                <div class="skills" style="margin: 1rem 0;">
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Spring Boot</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Kafka</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Elasticsearch</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Microservices</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/ravindrachabhadia">GitHub →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <h3 class="project-title">Travel Agent ChatBot</h3>
+                <p class="project-description">An intelligent chatbot built with Python that helps users plan their travel, providing personalized recommendations and assistance for trip planning.</p>
+                <div class="skills" style="margin: 1rem 0;">
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Python</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">AI/ML</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">NLP</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/ravindrachabhadia/TravelAgentChatBot">GitHub →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <h3 class="project-title">AI Chatbot Template</h3>
+                <p class="project-description">A flexible Python-based chatbot template that can be customized for various use cases, featuring modern AI capabilities and easy deployment.</p>
+                <div class="skills" style="margin: 1rem 0;">
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Python</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">AI/ML</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">RESTful API</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/ravindrachabhadia/chatbot-template-eor2xecoa1g">GitHub →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <h3 class="project-title">AI Agents Framework</h3>
+                <p class="project-description">Contributing to an advanced AI agents framework for building autonomous systems with intelligent decision-making capabilities.</p>
+                <div class="skills" style="margin: 1rem 0;">
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Python</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">AI Agents</span>
+                    <span class="skill-tag" style="font-size: 0.75rem; padding: 0.25rem 0.75rem;">Autonomous Systems</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/ravindrachabhadia/Agents">GitHub →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-content">
+            <p>I'm always interested in hearing about new opportunities and exciting projects. Feel free to reach out if you'd like to collaborate or just say hello!</p>
+            <div class="contact-links">
+                <a href="mailto:rchabhadia@gmail.com">📧 Email</a>
+                <a href="tel:+17744764836">📱 (774) 476-4836</a>
+                <a href="https://github.com/ravindrachabhadia">🐙 GitHub</a>
+                <a href="https://linkedin.com/in/ravindra-chabhadia">💼 LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Ravindra Chabhadia. Built with ❤️ and deployed on GitHub Pages.</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            
+            // Update theme toggle button
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.textContent = newTheme === 'light' ? '☀️' : '🌙';
+            
+            // Save preference
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            document.querySelector('.theme-toggle').textContent = savedTheme === 'light' ? '☀️' : '🌙';
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navigation background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = document.body.getAttribute('data-theme') === 'light' 
+                    ? 'rgba(255, 255, 255, 0.95)' 
+                    : 'rgba(10, 10, 10, 0.95)';
+            } else {
+                nav.style.background = document.body.getAttribute('data-theme') === 'light'
+                    ? 'rgba(255, 255, 255, 0.8)'
+                    : 'rgba(10, 10, 10, 0.8)';
+            }
+        });
+    </script>
+</body>
+</html>
